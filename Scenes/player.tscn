@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwyb16mp7u7hd"]
+[gd_scene load_steps=21 format=3 uid="uid://cwyb16mp7u7hd"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_a1bxw"]
 [ext_resource type="Texture2D" uid="uid://drbo8s0cxjupq" path="res://Sprites/tennis_ball.png" id="1_r860o"]
@@ -104,6 +104,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gr66j"]
+radius = 7.07107
+
 [node name="Player" type="Node2D"]
 script = ExtResource("1_a1bxw")
 
@@ -113,14 +116,16 @@ texture = ExtResource("1_r860o")
 
 [node name="Gun container" type="Node2D" parent="."]
 position = Vector2(0, -10)
+rotation = 1.28917
 script = ExtResource("2_4dvyj")
 
 [node name="Weapon Sprite" type="Sprite2D" parent="Gun container"]
+z_index = 5
 position = Vector2(18, -1)
 texture = ExtResource("2_1fmc6")
 
 [node name="Pojectile spawn point" type="Node2D" parent="Gun container"]
-position = Vector2(13, -2)
+position = Vector2(25.8337, -2.93602)
 
 [node name="Eyes Animation" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -14)
@@ -129,3 +134,9 @@ animation = &"Eyes_idle"
 autoplay = "Eyes_idle"
 frame_progress = 0.952822
 script = ExtResource("5_lp0wo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_gr66j")

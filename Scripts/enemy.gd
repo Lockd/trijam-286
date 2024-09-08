@@ -14,7 +14,8 @@ var jump_start_point: Vector2
 var jump_mid_point: Vector2
 var jump_end_point: Vector2
 
-@onready var player_ref : Player = %Player
+@onready var player_ref: Node2D = %Player
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,3 +54,10 @@ func _quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vecto
 	var r = q0.lerp(q1, t)
 	return r
 	
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if(body.owner != null):
+		print(body.owner.name)
+	body.queue_free()
+	queue_free()

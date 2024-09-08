@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://rxofjyswhuv3"]
+[gd_scene load_steps=16 format=3 uid="uid://rxofjyswhuv3"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_fv1nl"]
 [ext_resource type="Texture2D" uid="uid://dg604opyvpdyx" path="res://Sprites/arrow_left.png" id="1_qogy0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dw5lrfl6c0sxd" path="res://Sprites/arrow_up.png" id="3_0xylc"]
 [ext_resource type="Texture2D" uid="uid://budv07iylcqxi" path="res://Sprites/arrow_down.png" id="4_spog0"]
 [ext_resource type="Texture2D" uid="uid://c82g83y1l0qo1" path="res://Sprites/eyes.png" id="6_qx8wn"]
+[ext_resource type="Script" path="res://Scenes/bullet_detect.gd" id="7_7su46"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aqicm"]
 atlas = ExtResource("6_qx8wn")
@@ -57,6 +58,9 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uxp4y"]
+radius = 9.0
+
 [node name="Enemy" type="Node2D" node_paths=PackedStringArray("types")]
 script = ExtResource("1_fv1nl")
 types = [NodePath("Left"), NodePath("Right"), NodePath("Top"), NodePath("Down")]
@@ -86,3 +90,13 @@ sprite_frames = SubResource("SpriteFrames_kv5vg")
 animation = &"Eyes_idle"
 autoplay = "Eyes_idle"
 frame_progress = 0.99658
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("7_7su46")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_uxp4y")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

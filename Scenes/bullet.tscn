@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx6uwrjj5edll"]
+
+[ext_resource type="Texture2D" uid="uid://drbo8s0cxjupq" path="res://Sprites/tennis_ball.png" id="1_p0jjh"]
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_xjujh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_if44r"]
+radius = 2.0
+
+[node name="Bullet" type="CharacterBody2D"]
+visibility_layer = 3
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_xjujh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("1_p0jjh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 3
+shape = SubResource("CircleShape2D_if44r")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
