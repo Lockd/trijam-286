@@ -17,3 +17,6 @@ script = ExtResource("2_4dvyj")
 [node name="Weapon Sprite" type="Sprite2D" parent="Gun container"]
 position = Vector2(18, -1)
 texture = ExtResource("2_1fmc6")
+
+[node name="Pojectile spawn point" type="Node2D" parent="Gun container"]
+position = Vector2(13, -2)
