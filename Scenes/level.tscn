@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://b6ybeiybn2fej"]
+[gd_scene load_steps=6 format=4 uid="uid://b6ybeiybn2fej"]
 
 [ext_resource type="Texture2D" uid="uid://dxmlc1sloe1n" path="res://tiles/tilemap_packed.png" id="1_f3cbm"]
 [ext_resource type="PackedScene" uid="uid://cwyb16mp7u7hd" path="res://Scenes/player.tscn" id="2_ux5bo"]
@@ -7,12 +7,13 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dk221"]
 texture = ExtResource("1_f3cbm")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, 1, 8, 1.125, 8, 8, 2.125, 8)
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 1.125, 8, 1.375, 8, 8, -8, 8)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.625, -1.75, 0.875, -1.875, 8, -8, 8)
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:0/0 = 0
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:0/0 = 0
@@ -25,11 +26,11 @@ texture = ExtResource("1_f3cbm")
 11:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.125, -8, 8, -8, 8, 8, 2.125, 8)
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:1/0 = 0
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:1/0 = 0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -2.125, -8, -2, 8, -8, 8)
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:1/0 = 0
 4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:1/0 = 0
@@ -42,11 +43,11 @@ texture = ExtResource("1_f3cbm")
 11:1/0 = 0
 0:2/0 = 0
 1:2/0 = 0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.875, -8, 8, -8, 8, 0.875, 2, 0.875)
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:2/0 = 0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 1.125, -8, 1.125)
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:2/0 = 0
-3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -2, -8, -2, 0.75, -8, 1)
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:2/0 = 0
 4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:2/0 = 0
@@ -166,9 +167,6 @@ texture = ExtResource("1_f3cbm")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_dk221")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oco2p"]
-size = Vector2(287, 144)
-
 [node name="Level" type="Node2D"]
 
 [node name="Walls" type="TileMapLayer" parent="."]
@@ -185,18 +183,7 @@ zoom = Vector2(2, 2)
 
 [node name="Player" parent="." instance=ExtResource("2_ux5bo")]
 unique_name_in_owner = true
-position = Vector2(104, 118)
-
-[node name="Timer" type="Timer" parent="Player"]
-one_shot = true
-
-[node name="SpawnArea" type="Area2D" parent="."]
-unique_name_in_owner = true
-
-[node name="SpawnShape" type="CollisionShape2D" parent="SpawnArea"]
-unique_name_in_owner = true
-position = Vector2(167.5, 112)
-shape = SubResource("RectangleShape2D_oco2p")
+position = Vector2(165, 118)
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 position = Vector2(176, 111)
@@ -205,5 +192,10 @@ script = ExtResource("4_ip8rj")
 [node name="Timer" type="Timer" parent="EnemySpawner"]
 autostart = true
 
-[connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]
+[node name="min" type="Node2D" parent="EnemySpawner"]
+position = Vector2(-147, -65)
+
+[node name="max" type="Node2D" parent="EnemySpawner"]
+position = Vector2(133, 72)
+
 [connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]

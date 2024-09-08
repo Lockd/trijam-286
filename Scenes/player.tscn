@@ -1,14 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://cwyb16mp7u7hd"]
+[gd_scene load_steps=23 format=3 uid="uid://cwyb16mp7u7hd"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_a1bxw"]
 [ext_resource type="Texture2D" uid="uid://drbo8s0cxjupq" path="res://Sprites/tennis_ball.png" id="1_r860o"]
 [ext_resource type="Texture2D" uid="uid://cm7ddmisrd01g" path="res://Sprites/gun.png" id="2_1fmc6"]
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="2_4dvyj"]
-[ext_resource type="PackedScene" path="res://Scenes/shadow.tscn" id="2_kn66a"]
+[ext_resource type="PackedScene" uid="uid://cy1mvpqx3qflt" path="res://Scenes/shadow.tscn" id="2_kn66a"]
 [ext_resource type="PackedScene" uid="uid://cx6uwrjj5edll" path="res://Scenes/bullet.tscn" id="2_x4vww"]
 [ext_resource type="Texture2D" uid="uid://c82g83y1l0qo1" path="res://Sprites/eyes.png" id="4_0mbbt"]
 [ext_resource type="Script" path="res://Scripts/eyes_animation.gd" id="5_lp0wo"]
-[ext_resource type="Script" path="res://Scripts/player_rb.gd" id="9_xrair"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ax05"]
 atlas = ExtResource("4_0mbbt")
@@ -107,12 +106,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lfudg"]
-radius = 7.07107
+[sub_resource type="CircleShape2D" id="CircleShape2D_wkble"]
 
 [node name="Player" type="Node2D" groups=["Player"]]
 script = ExtResource("1_a1bxw")
 bullet = ExtResource("2_x4vww")
+movement_speed = 50
 
 [node name="Shadow" parent="." instance=ExtResource("2_kn66a")]
 position = Vector2(-7.10543e-15, -1)
@@ -120,23 +119,24 @@ rotation = 3.14159
 scale = Vector2(1, 0.3)
 
 [node name="Player sprite" type="Sprite2D" parent="."]
+z_index = 5
 position = Vector2(0, -9)
 texture = ExtResource("1_r860o")
 
 [node name="Gun container" type="Node2D" parent="."]
 position = Vector2(0, -10)
-rotation = 1.28917
 script = ExtResource("2_4dvyj")
 
 [node name="Weapon Sprite" type="Sprite2D" parent="Gun container"]
-z_index = 5
+z_index = 10
 position = Vector2(18, -1)
 texture = ExtResource("2_1fmc6")
 
 [node name="Pojectile spawn point" type="Node2D" parent="Gun container"]
-position = Vector2(25.8337, -2.93602)
+position = Vector2(13, -2)
 
 [node name="Eyes Animation" type="AnimatedSprite2D" parent="."]
+z_index = 5
 position = Vector2(1, -14)
 sprite_frames = SubResource("SpriteFrames_uu1v4")
 animation = &"Eyes_idle"
@@ -144,14 +144,8 @@ autoplay = "Eyes_idle"
 frame_progress = 0.952822
 script = ExtResource("5_lp0wo")
 
-[node name="PlayerRB" type="RigidBody2D" parent="."]
-mass = 0.001
-gravity_scale = 0.0
-freeze = true
-script = ExtResource("9_xrair")
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerRB"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -9)
-shape = SubResource("CircleShape2D_lfudg")
-
-[connection signal="body_entered" from="PlayerRB" to="PlayerRB" method="_on_body_entered"]
+shape = SubResource("CircleShape2D_wkble")
