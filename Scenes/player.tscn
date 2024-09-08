@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cwyb16mp7u7hd"]
+[gd_scene load_steps=20 format=3 uid="uid://cwyb16mp7u7hd"]
 
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_a1bxw"]
 [ext_resource type="Texture2D" uid="uid://drbo8s0cxjupq" path="res://Sprites/tennis_ball.png" id="1_r860o"]
 [ext_resource type="Texture2D" uid="uid://cm7ddmisrd01g" path="res://Sprites/gun.png" id="2_1fmc6"]
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="2_4dvyj"]
@@ -104,6 +105,7 @@ animations = [{
 }]
 
 [node name="Player" type="Node2D"]
+script = ExtResource("1_a1bxw")
 
 [node name="Player sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -9)

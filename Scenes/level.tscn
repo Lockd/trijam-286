@@ -181,7 +181,9 @@ position = Vector2(174, 110)
 zoom = Vector2(2, 2)
 
 [node name="Player" parent="." instance=ExtResource("2_ux5bo")]
-position = Vector2(113, 119)
+unique_name_in_owner = true
+position = Vector2(104, 118)
 
 [node name="Enemy" parent="." instance=ExtResource("3_5e6qf")]
-position = Vector2(229, 117)
+position = Vector2(262, 155)
+jump_distance = 40.0
