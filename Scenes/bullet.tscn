@@ -21,7 +21,7 @@ visibility_layer = 3
 shape = SubResource("CircleShape2D_if44r")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
+autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

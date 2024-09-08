@@ -187,9 +187,6 @@ zoom = Vector2(2, 2)
 unique_name_in_owner = true
 position = Vector2(104, 118)
 
-[node name="Timer" type="Timer" parent="Player"]
-one_shot = true
-
 [node name="SpawnArea" type="Area2D" parent="."]
 unique_name_in_owner = true
 
@@ -205,5 +202,4 @@ script = ExtResource("4_ip8rj")
 [node name="Timer" type="Timer" parent="EnemySpawner"]
 autostart = true
 
-[connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]
 [connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]

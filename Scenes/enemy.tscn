@@ -1,12 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://rxofjyswhuv3"]
+[gd_scene load_steps=17 format=3 uid="uid://rxofjyswhuv3"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_fv1nl"]
 [ext_resource type="Texture2D" uid="uid://dg604opyvpdyx" path="res://Sprites/arrow_left.png" id="1_qogy0"]
 [ext_resource type="Texture2D" uid="uid://5x8366mr03ur" path="res://Sprites/arrow_right.png" id="2_58rtj"]
-[ext_resource type="PackedScene" uid="uid://cy1mvpqx3qflt" path="res://Scenes/shadow.tscn" id="2_bnf14"]
+[ext_resource type="PackedScene" path="res://Scenes/shadow.tscn" id="2_bnf14"]
 [ext_resource type="Texture2D" uid="uid://dw5lrfl6c0sxd" path="res://Sprites/arrow_up.png" id="3_0xylc"]
 [ext_resource type="Texture2D" uid="uid://budv07iylcqxi" path="res://Sprites/arrow_down.png" id="4_spog0"]
 [ext_resource type="Texture2D" uid="uid://c82g83y1l0qo1" path="res://Sprites/eyes.png" id="6_qx8wn"]
+[ext_resource type="Script" path="res://Scripts/enemy_collision.gd" id="8_ynyxm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aqicm"]
 atlas = ExtResource("6_qx8wn")
@@ -58,6 +59,9 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3khwc"]
+radius = 7.0
+
 [node name="Enemy" type="Node2D" node_paths=PackedStringArray("types")]
 script = ExtResource("1_fv1nl")
 types = [NodePath("Left"), NodePath("Right"), NodePath("Top"), NodePath("Down")]
@@ -92,3 +96,11 @@ sprite_frames = SubResource("SpriteFrames_kv5vg")
 animation = &"Eyes_idle"
 autoplay = "Eyes_idle"
 frame_progress = 0.948979
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("8_ynyxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_3khwc")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

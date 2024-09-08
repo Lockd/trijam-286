@@ -16,7 +16,7 @@ var jump_mid_point: Vector2
 var jump_end_point: Vector2
 var ground_mid_point: Vector2
 
-@onready var player_ref: Node2D = %Player
+@onready var player_ref: Node2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -54,8 +54,9 @@ func _process(delta: float) -> void:
 	active_sprite.scale.y = move_toward(active_sprite.scale.y, 1, 0.8 * delta)
 	
 	
+var type_index = 0;
 func select_enemy_type():
-	var type_index = randi_range(0, types.size() - 1)
+	type_index = randi_range(0, types.size() - 1)
 	types[type_index].visible = true
 	active_sprite = types[type_index]
 
