@@ -5,6 +5,7 @@ var active_sprite : Sprite2D
 @export var jump_cooldown := 1.3
 @export var jump_duration := 1
 @export var jump_distance := 1.5
+@onready var shadow: Sprite2D = $Shadow
 
 var next_jump: float = 0
 var is_jumping := false
@@ -13,6 +14,7 @@ var jump_start_time : float = 0
 var jump_start_point: Vector2
 var jump_mid_point: Vector2
 var jump_end_point: Vector2
+var ground_mid_point: Vector2
 
 @onready var player_ref: Node2D = %Player
 
@@ -31,16 +33,24 @@ func _process(delta: float) -> void:
 		jump_start_time = current_time
 		jump_start_point = position
 		jump_end_point = jump_start_point + (player_ref.position - position).normalized() * jump_distance
-		jump_mid_point = jump_start_point + (jump_end_point - jump_start_point) / 2 + Vector2(0, -25)
-		
+		ground_mid_point = jump_start_point + (jump_end_point - jump_start_point) / 2
+		jump_mid_point = ground_mid_point + Vector2(0, -25)
+		active_sprite.scale = Vector2(0.75, 1.25)
+	
 	if is_jumping:
 		var target_position = _quadratic_bezier(jump_start_point, jump_mid_point, jump_end_point, current_time - jump_start_time)
 		position = target_position
 		
+		var target_shadow_position = _quadratic_bezier(jump_start_point, ground_mid_point, jump_end_point, current_time - jump_start_time)
+		shadow.global_position = target_shadow_position - Vector2(0, -10)
 		
 	if (current_time - jump_start_time) > jump_duration and is_jumping:
 		print("should stop jumping " + str(current_time))
+		active_sprite.scale = Vector2(1.25, 0.75)
 		is_jumping = false
+		
+	active_sprite.scale.x = move_toward(active_sprite.scale.x, 1, 0.8 * delta)
+	active_sprite.scale.y = move_toward(active_sprite.scale.y, 1, 0.8 * delta)
 	
 	
 func select_enemy_type():
