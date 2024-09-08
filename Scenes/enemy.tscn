@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://rxofjyswhuv3"]
+
+[ext_resource type="Texture2D" uid="uid://dg604opyvpdyx" path="res://Sprites/arrow_left.png" id="1_qogy0"]
+[ext_resource type="Texture2D" uid="uid://5x8366mr03ur" path="res://Sprites/arrow_right.png" id="2_58rtj"]
+[ext_resource type="Texture2D" uid="uid://dw5lrfl6c0sxd" path="res://Sprites/arrow_up.png" id="3_0xylc"]
+[ext_resource type="Texture2D" uid="uid://budv07iylcqxi" path="res://Sprites/arrow_down.png" id="4_spog0"]
+
+[node name="Enemy" type="Node2D"]
+
+[node name="Left" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("1_qogy0")
+
+[node name="Right" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -11)
+texture = ExtResource("2_58rtj")
+
+[node name="Top" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -11)
+texture = ExtResource("3_0xylc")
+
+[node name="Down" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -11)
+texture = ExtResource("4_spog0")

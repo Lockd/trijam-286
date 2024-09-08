@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwyb16mp7u7hd"]
+
+[ext_resource type="Texture2D" uid="uid://drbo8s0cxjupq" path="res://Sprites/tennis_ball.png" id="1_r860o"]
+[ext_resource type="Texture2D" uid="uid://cm7ddmisrd01g" path="res://Sprites/gun.png" id="2_1fmc6"]
+[ext_resource type="Script" path="res://Scripts/gun.gd" id="2_4dvyj"]
+
+[node name="Player" type="Node2D"]
+
+[node name="Player sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+texture = ExtResource("1_r860o")
+
+[node name="Gun container" type="Node2D" parent="."]
+position = Vector2(0, -10)
+script = ExtResource("2_4dvyj")
+
+[node name="Weapon Sprite" type="Sprite2D" parent="Gun container"]
+position = Vector2(18, -1)
+texture = ExtResource("2_1fmc6")
