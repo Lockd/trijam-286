@@ -22,4 +22,5 @@ func _input(event: InputEvent) -> void:
 		owner.add_child(bullet)
 		bullet.global_position = pojectile_spawn_point.global_position
 		bullet.newvelocity = direction.normalized()
+		bullet.rotation = direction.angle()
 	

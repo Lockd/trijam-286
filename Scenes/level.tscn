@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://b6ybeiybn2fej"]
+[gd_scene load_steps=7 format=4 uid="uid://b6ybeiybn2fej"]
 
 [ext_resource type="Texture2D" uid="uid://dxmlc1sloe1n" path="res://tiles/tilemap_packed.png" id="1_f3cbm"]
 [ext_resource type="PackedScene" uid="uid://cwyb16mp7u7hd" path="res://Scenes/player.tscn" id="2_ux5bo"]
 [ext_resource type="PackedScene" uid="uid://rxofjyswhuv3" path="res://Scenes/enemy.tscn" id="3_5e6qf"]
+[ext_resource type="Script" path="res://Scripts/enemy_spawner.gd" id="4_ip8rj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dk221"]
 texture = ExtResource("1_f3cbm")
@@ -188,4 +189,11 @@ position = Vector2(104, 118)
 position = Vector2(262, 155)
 jump_distance = 40.0
 
-[node name="EnemySpawner" type="Node" parent="."]
+[node name="EnemySpawner" type="Node2D" parent="."]
+position = Vector2(176, 111)
+script = ExtResource("4_ip8rj")
+
+[node name="Timer" type="Timer" parent="EnemySpawner"]
+autostart = true
+
+[connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]

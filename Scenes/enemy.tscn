@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_fv1nl"]
 [ext_resource type="Texture2D" uid="uid://dg604opyvpdyx" path="res://Sprites/arrow_left.png" id="1_qogy0"]
 [ext_resource type="Texture2D" uid="uid://5x8366mr03ur" path="res://Sprites/arrow_right.png" id="2_58rtj"]
-[ext_resource type="PackedScene" uid="uid://cy1mvpqx3qflt" path="res://Scenes/shadow.tscn" id="2_bnf14"]
+[ext_resource type="PackedScene" path="res://Scenes/shadow.tscn" id="2_bnf14"]
 [ext_resource type="Texture2D" uid="uid://dw5lrfl6c0sxd" path="res://Sprites/arrow_up.png" id="3_0xylc"]
 [ext_resource type="Texture2D" uid="uid://budv07iylcqxi" path="res://Sprites/arrow_down.png" id="4_spog0"]
 [ext_resource type="Texture2D" uid="uid://c82g83y1l0qo1" path="res://Sprites/eyes.png" id="6_qx8wn"]
