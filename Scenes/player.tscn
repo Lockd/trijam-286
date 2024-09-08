@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://cwyb16mp7u7hd"]
+[gd_scene load_steps=23 format=3 uid="uid://cwyb16mp7u7hd"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_a1bxw"]
 [ext_resource type="Texture2D" uid="uid://drbo8s0cxjupq" path="res://Sprites/tennis_ball.png" id="1_r860o"]
 [ext_resource type="Texture2D" uid="uid://cm7ddmisrd01g" path="res://Sprites/gun.png" id="2_1fmc6"]
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="2_4dvyj"]
-[ext_resource type="PackedScene" path="res://Scenes/shadow.tscn" id="2_kn66a"]
+[ext_resource type="PackedScene" uid="uid://cy1mvpqx3qflt" path="res://Scenes/shadow.tscn" id="2_kn66a"]
+[ext_resource type="PackedScene" uid="uid://cx6uwrjj5edll" path="res://Scenes/bullet.tscn" id="2_x4vww"]
 [ext_resource type="Texture2D" uid="uid://c82g83y1l0qo1" path="res://Sprites/eyes.png" id="4_0mbbt"]
 [ext_resource type="Script" path="res://Scripts/eyes_animation.gd" id="5_lp0wo"]
 
@@ -108,8 +109,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_gr66j"]
 radius = 7.07107
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["Player"]]
 script = ExtResource("1_a1bxw")
+bullet = ExtResource("2_x4vww")
 
 [node name="Shadow" parent="." instance=ExtResource("2_kn66a")]
 position = Vector2(-7.10543e-15, -1)

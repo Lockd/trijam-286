@@ -187,7 +187,6 @@ position = Vector2(104, 118)
 
 [node name="Enemy" parent="." instance=ExtResource("3_5e6qf")]
 position = Vector2(262, 155)
-jump_distance = 40.0
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 position = Vector2(176, 111)
