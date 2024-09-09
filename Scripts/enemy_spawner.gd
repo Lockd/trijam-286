@@ -2,6 +2,7 @@ extends Node2D
 
 var pipe = preload("res://Scenes/enemy.tscn")
 @onready var player: Node2D = %Player
+# In every scene where we add this logic we should also adjust min and max
 @onready var max_location: Node2D = $max
 @onready var min_location: Node2D = $min
 
@@ -17,9 +18,9 @@ func _ready() -> void:
 	y_max = max_location.global_position.y
 
 func  spawn_enemy():
-	print("Enemy Spawned")
-	var enemy = pipe.instantiate()
+	var enemy: Enemy = pipe.instantiate()
 	owner.add_child(enemy)
+	enemy.select_enemy_type(true)
 	var is_on_x = randf() > 0.5
 	var rand_position :=  Vector2(0, 0)
 	
@@ -32,15 +33,14 @@ func  spawn_enemy():
 			rand_position.y = y_min
 		
 	else:
+		rand_position.y = randf_range(y_min, y_max)
 		var is_left = randf() > 0.5
 		if is_left:
 			rand_position.x = x_min 
 		else:
 			rand_position.x = x_max
-			
-		rand_position.y = randf_range(y_min, y_max)
 		
 	enemy.global_position = rand_position
-	
-func _on_timer_timeout() -> void:
+
+func _on_random_timer_timeout() -> void:
 	spawn_enemy()

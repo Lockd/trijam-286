@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dxmlc1sloe1n" path="res://tiles/tilemap_packed.png" id="1_f3cbm"]
 [ext_resource type="PackedScene" uid="uid://cwyb16mp7u7hd" path="res://Scenes/player.tscn" id="2_ux5bo"]
-[ext_resource type="Script" path="res://Scripts/enemy_spawner.gd" id="4_ip8rj"]
+[ext_resource type="PackedScene" uid="uid://cipne73t60tbh" path="res://Scenes/enemy_spawner.tscn" id="3_4843v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dk221"]
 texture = ExtResource("1_f3cbm")
@@ -185,17 +185,4 @@ zoom = Vector2(2, 2)
 unique_name_in_owner = true
 position = Vector2(165, 118)
 
-[node name="EnemySpawner" type="Node2D" parent="."]
-position = Vector2(176, 111)
-script = ExtResource("4_ip8rj")
-
-[node name="Timer" type="Timer" parent="EnemySpawner"]
-autostart = true
-
-[node name="min" type="Node2D" parent="EnemySpawner"]
-position = Vector2(-147, -65)
-
-[node name="max" type="Node2D" parent="EnemySpawner"]
-position = Vector2(133, 72)
-
-[connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]
+[node name="EnemySpawner" parent="." instance=ExtResource("3_4843v")]

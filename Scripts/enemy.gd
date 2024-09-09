@@ -1,11 +1,25 @@
 extends Node2D
 
+class_name Enemy
+
+# Enemy types
 @export var types: Array[Sprite2D]= []
 var active_sprite : Sprite2D
+enum enemy_types { ARROW, BOMB }
+var enemy_type: enemy_types = enemy_types.ARROW
+
+# AI movement 
 @export var jump_cooldown := 1.3
 @export var jump_duration := 1
 @export var jump_distance := 1.5
+
+# Visuals
+@onready var bomb_sprite: Sprite2D = $BombSprite
 @onready var shadow: Sprite2D = $Shadow
+
+# Other scripts references
+@onready var player_ref: Node2D
+@onready var enemy_collision: Enemy_Collision = $CollisionArea
 
 var next_jump: float = 0
 var is_jumping := false
@@ -16,15 +30,9 @@ var jump_mid_point: Vector2
 var jump_end_point: Vector2
 var ground_mid_point: Vector2
 
-@onready var player_ref: Node2D
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	select_enemy_type()
 	player_ref = get_tree().get_nodes_in_group("Player")[0]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var current_time = Time.get_unix_time_from_system()
 	if next_jump < current_time and !is_jumping:
@@ -54,22 +62,29 @@ func _process(delta: float) -> void:
 	active_sprite.scale.y = move_toward(active_sprite.scale.y, 1, 0.8 * delta)
 	
 	
-var type_index = 0;
-func select_enemy_type():
-	type_index = randi_range(0, types.size() - 1)
-	types[type_index].visible = true
-	active_sprite = types[type_index]
+func select_enemy_type(is_bomb: bool):
+	if  (is_bomb):
+		print("bomb sprite" + str(bomb_sprite))
+		active_sprite = bomb_sprite
+		bomb_sprite.visible = true
+		enemy_type = enemy_types.BOMB
+	else:
+		var type_index = randi_range(0, types.size() - 1)
+		types[type_index].visible = true
+		active_sprite = types[type_index]
+		enemy_type = enemy_types.ARROW
+		
+	enemy_collision.set_enemy_type(enemy_type)
 
 func _quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:
 	var q0 = p0.lerp(p1, t)
 	var q1 = p1.lerp(p2, t)
 	var r = q0.lerp(q1, t)
 	return r
-	
-
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if(body.owner != null):
 		print(body.owner.name)
+	# TODO handle collision based on the enemy_type variable
 	body.queue_free()
 	queue_free()

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cipne73t60tbh"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_spawner.gd" id="1_d6h7g"]
+[ext_resource type="Script" path="res://Scripts/random_timer.gd" id="2_gt6b8"]
+
+[node name="EnemySpawner" type="Node2D"]
+position = Vector2(176, 111)
+script = ExtResource("1_d6h7g")
+
+[node name="min" type="Node2D" parent="."]
+position = Vector2(-147, -65)
+
+[node name="max" type="Node2D" parent="."]
+position = Vector2(133, 72)
+
+[node name="RandomTimer" type="Timer" parent="."]
+autostart = true
+script = ExtResource("2_gt6b8")
+max_time = 1.2
+
+[connection signal="timeout" from="RandomTimer" to="." method="_on_random_timer_timeout"]

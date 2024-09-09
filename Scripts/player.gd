@@ -7,7 +7,6 @@ extends Node2D
 var moving = false
 var target_position := global_position
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("Player")
 
@@ -15,7 +14,6 @@ func _process(delta: float) -> void:
 	# gradually move
 	if moving:
 		position = position.move_toward(target_position, delta * movement_speed)
-
 	# stop moving
 	if global_position.distance_to(target_position) < 1:
 		moving=false 
