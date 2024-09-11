@@ -3,7 +3,7 @@ extends Node2D
 class_name Enemy
 
 # Enemy types
-@export var types: Array[Sprite2D]= []
+@export var types: Array[Arrow_Direction]= []
 var active_sprite : Sprite2D
 enum enemy_types { ARROW, BOMB }
 var enemy_type: enemy_types = enemy_types.ARROW
@@ -37,7 +37,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var current_time = Time.get_unix_time_from_system()
 	if next_jump < current_time and !is_jumping:
-		print("should start jump " + str(current_time))
 		is_jumping = true
 		next_jump = current_time + jump_cooldown + jump_cooldown
 		jump_start_time = current_time
@@ -55,7 +54,6 @@ func _process(delta: float) -> void:
 		shadow.global_position = target_shadow_position - Vector2(0, -10)
 		
 	if (current_time - jump_start_time) > jump_duration and is_jumping:
-		print("should stop jumping " + str(current_time))
 		active_sprite.scale = Vector2(1.25, 0.75)
 		is_jumping = false
 		
@@ -63,29 +61,16 @@ func _process(delta: float) -> void:
 	active_sprite.scale.y = move_toward(active_sprite.scale.y, 1, 0.8 * delta)
 	
 	
-func select_enemy_type(is_bomb: bool):
-	if  (is_bomb):
-		print("bomb sprite" + str(bomb_sprite))
-		active_sprite = bomb_sprite
-		bomb_sprite.visible = true
-		enemy_type = enemy_types.BOMB
-	else:
-		type_index = randi_range(0, types.size() - 1)
-		types[type_index].visible = true
-		active_sprite = types[type_index]
-		enemy_type = enemy_types.ARROW
-		
-	enemy_collision.set_enemy_type(enemy_type)
+func select_enemy_type():
+	type_index = randi_range(0, types.size() - 1)
+	types[type_index].visible = true
+	active_sprite = types[type_index]
+	enemy_type = enemy_types.ARROW
+	
+	enemy_collision.set_enemy_type(enemy_type, active_sprite.direction)
 
 func _quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:
 	var q0 = p0.lerp(p1, t)
 	var q1 = p1.lerp(p2, t)
 	var r = q0.lerp(q1, t)
 	return r
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if(body.owner != null):
-		print(body.owner.name)
-	# TODO handle collision based on the enemy_type variable
-	body.queue_free()
-	queue_free()

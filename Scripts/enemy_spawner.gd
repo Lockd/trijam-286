@@ -1,7 +1,6 @@
 extends Node2D
 
 var pipe = preload("res://Scenes/enemy.tscn")
-@onready var player: Node2D = %Player
 @onready var spawn_enemies_timer: RandomTimer = $SpawnEnemiesTimer
 @onready var wave_pause_timer: Timer = $WavePauseTimer
 
@@ -15,10 +14,8 @@ var y_max: float
 
 @export_category("Enemy Waves")
 @export var pause_between_waves := 3
-@export var arrows_per_wave: int = 8
-@export var bombs_per_wave: int = 3
-var spawned_bombs: int = 0
-var spawned_arrows: int = 0
+@export var enemies_per_wave: int = 8
+var spawned_enemies: int = 0
 
 func _ready() -> void:
 	x_min = min_location.global_position.x
@@ -31,20 +28,15 @@ func _ready() -> void:
 func  spawn_enemy():
 	var enemy: Enemy = pipe.instantiate()
 	owner.add_child(enemy)
-	var is_bomb = randf() >= 0.5 && spawned_bombs <= bombs_per_wave
-	if is_bomb:
-		spawned_bombs += 1
-	else:
-		spawned_arrows += 1
-	enemy.select_enemy_type(is_bomb)
+	enemy.select_enemy_type()
+	spawned_enemies += 1
 	var rand_position = get_spawn_position()
 	enemy.global_position = rand_position
 	
-	if spawned_arrows + spawned_bombs >= arrows_per_wave + bombs_per_wave:
+	if spawned_enemies >= enemies_per_wave:
 		spawn_enemies_timer.stop()
 		wave_pause_timer.start()
-		spawned_arrows = 0
-		spawned_bombs = 0
+		spawned_enemies = 0
 	
 
 func get_spawn_position() -> Vector2:

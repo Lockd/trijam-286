@@ -7,7 +7,6 @@
 position = Vector2(176, 111)
 script = ExtResource("1_d6h7g")
 pause_between_waves = 8
-arrows_per_wave = 6
 
 [node name="min" type="Node2D" parent="."]
 position = Vector2(-147, -65)
@@ -22,6 +21,6 @@ max_time = 1.2
 
 [node name="WavePauseTimer" type="Timer" parent="."]
 
-[connection signal="timeout" from="SpawnEnemiesTimer" to="." method="_on_spawn_enemies_timeout"]
 [connection signal="timeout" from="SpawnEnemiesTimer" to="." method="_on_random_timer_timeout"]
+[connection signal="timeout" from="SpawnEnemiesTimer" to="." method="_on_spawn_enemies_timeout"]
 [connection signal="timeout" from="WavePauseTimer" to="." method="_on_wave_pause_timer_timeout"]
