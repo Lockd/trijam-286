@@ -7,6 +7,7 @@ class_name Enemy
 var active_sprite : Sprite2D
 enum enemy_types { ARROW, BOMB }
 var enemy_type: enemy_types = enemy_types.ARROW
+var type_index = 0
 
 # AI movement 
 @export var jump_cooldown := 1.3
@@ -69,7 +70,7 @@ func select_enemy_type(is_bomb: bool):
 		bomb_sprite.visible = true
 		enemy_type = enemy_types.BOMB
 	else:
-		var type_index = randi_range(0, types.size() - 1)
+		type_index = randi_range(0, types.size() - 1)
 		types[type_index].visible = true
 		active_sprite = types[type_index]
 		enemy_type = enemy_types.ARROW
